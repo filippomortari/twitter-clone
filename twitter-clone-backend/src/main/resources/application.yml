@@ -10,5 +10,7 @@ spring:
     jpa:
       hibernate:
         ddl-auto: validate
-#      repositories:
-#        bootstrap-mode: default
+
+server:
+  error:
+    include-message: always

@@ -1,6 +1,6 @@
 package com.filippomortari.twitterclonebackend.repository;
 
-import com.filippomortari.twitterclonebackend.domain.User;
+import com.filippomortari.twitterclonebackend.domain.entity.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

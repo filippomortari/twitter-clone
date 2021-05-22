@@ -1,7 +1,7 @@
 package com.filippomortari.twitterclonebackend.repository;
 
-import com.filippomortari.twitterclonebackend.domain.Tweet;
-import com.filippomortari.twitterclonebackend.domain.User;
+import com.filippomortari.twitterclonebackend.domain.entity.Tweet;
+import com.filippomortari.twitterclonebackend.domain.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

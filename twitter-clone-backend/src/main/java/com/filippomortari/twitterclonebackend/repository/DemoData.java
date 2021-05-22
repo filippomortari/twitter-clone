@@ -1,13 +1,11 @@
 package com.filippomortari.twitterclonebackend.repository;
 
-import com.filippomortari.twitterclonebackend.domain.Tweet;
-import com.filippomortari.twitterclonebackend.domain.User;
+import com.filippomortari.twitterclonebackend.domain.entity.Tweet;
+import com.filippomortari.twitterclonebackend.domain.entity.User;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
