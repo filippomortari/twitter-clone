@@ -1,0 +1,66 @@
+databaseChangeLog:
+- changeSet:
+    id: insert_initial_users
+    author: filippomortari (generated)
+    comment: "insert initial users"
+    changes:
+      - insert:
+          tableName: twitter_user
+          columns:
+            - column:
+                name: username
+                value: "user1"
+            - column:
+                name: first_name
+                value: "Albert"
+            - column:
+                name: last_name
+                value: "Einstein"
+      - insert:
+          tableName: twitter_user
+          columns:
+            - column:
+                name: username
+                value: "user2"
+            - column:
+                name: first_name
+                value: "Marie"
+            - column:
+                name: last_name
+                value: "Curie"
+      - insert:
+          tableName: twitter_user
+          columns:
+            - column:
+                name: username
+                value: "user3"
+            - column:
+                name: first_name
+                value: "Sigmund"
+            - column:
+                name: last_name
+                value: "Freud"
+      - insert:
+          tableName: twitter_user
+          columns:
+            - column:
+                name: username
+                value: "user4"
+            - column:
+                name: first_name
+                value: "Max"
+            - column:
+                name: last_name
+                value: "Planck"
+      - insert:
+          tableName: twitter_user
+          columns:
+            - column:
+                name: username
+                value: "user5"
+            - column:
+                name: first_name
+                value: "Niels"
+            - column:
+                name: last_name
+                value: "Bohr"

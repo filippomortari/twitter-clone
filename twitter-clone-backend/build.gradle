@@ -1,0 +1,110 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'org.liquibase.gradle' version '2.0.4'
+}
+
+group = 'com.filippomortari'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
+}
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	liquibaseRuntime.extendsFrom runtime
+}
+
+repositories {
+	mavenCentral()
+}
+
+diff.dependsOn compileJava
+diffChangeLog.dependsOn compileJava
+generateChangelog.dependsOn compileJava
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.liquibase:liquibase-core:4.3.5'
+
+
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.liquibase:liquibase-core'
+	testImplementation('com.h2database:h2')
+	liquibaseRuntime 'org.liquibase:liquibase-core'
+	liquibaseRuntime 'org.liquibase.ext:liquibase-hibernate5:4.3.3'
+	liquibaseRuntime "org.postgresql:postgresql"
+	liquibaseRuntime 'org.springframework.boot:spring-boot'
+	liquibaseRuntime 'org.springframework.boot:spring-boot-starter-data-jpa'
+	liquibaseRuntime group: 'org.hibernate', name: 'hibernate-core', version: '5.4.30.Final'
+	liquibaseRuntime 'org.springframework:spring-orm'
+	liquibaseRuntime group: 'org.yaml', name: 'snakeyaml', version: '1.28'
+	liquibaseRuntime 'javax.xml.bind:jaxb-api'
+	liquibaseRuntime 'ch.qos.logback:logback-classic:1.2.3' // Fix for https://liquibase.jira.com/browse/CORE-3212
+	liquibaseRuntime sourceSets.main.output
+	liquibaseRuntime sourceSets.main.compileClasspath
+
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bootJar {
+	layered {
+		includeLayerTools = true
+	}
+}
+
+bootBuildImage {
+	imageName = "${project.group}/${project.name}:${project.version}"
+}
+
+project.ext.diffChangelogFile = "src/main/resources/db/changelog/" + new Date().format("yyyyMMddHHmmss") + "_changelog.yml"
+
+liquibase {
+	activities {
+		main {
+			driver "org.postgresql.Driver"
+			url "jdbc:postgresql://localhost:5432/postgres"
+			username "postgres"
+			password "postgres"
+			changeLogFile project.ext.diffChangelogFile
+			referenceUrl "hibernate:spring:com.filippomortari.twitterclonebackend?dialect=org.hibernate.dialect.PostgreSQL10Dialect"
+//					"&hibernate.physical_naming_strategy=" +
+//					"org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"
+//					+"&hibernate.implicit_naming_strategy=" +
+//					"org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl"
+			referenceDriver "liquibase.ext.hibernate.database.connection.HibernateDriver"
+			defaultSchemaName "public"
+			logLevel "debug"
+			classpath "$buildDir/classes/java/main"
+			databaseChangeLogTableName 'database_changelog'
+			databaseChangeLogLockTableName 'database_changelog_lock'
+		}
+	}
+
+	runList = 'main'
+}
+
+diff.dependsOn compileJava
+diffChangeLog.dependsOn compileJava
+generateChangelog.dependsOn compileJava
+
+task makeMigrations(type: Exec) {
+	group = 'Liquibase'
+	description = 'Produces a migration'
+
+	workingDir "${rootDir}"
+	commandLine './gradlew', 'diffChangeLog', "-Dorg.hibernate.envers.audit_table_suffix=_aud"
+}
+

@@ -1,0 +1,60 @@
+databaseChangeLog:
+- changeSet:
+    id: 1621682209507-1
+    author: filippomortari (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: tweetPK
+            name: id
+            type: UUID
+        - column:
+            name: content
+            type: VARCHAR(255)
+        - column:
+            name: created_date
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: author
+            type: VARCHAR(255)
+        tableName: tweet
+- changeSet:
+    id: 1621682209507-2
+    author: filippomortari (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: twitter_userPK
+            name: username
+            type: VARCHAR(255)
+        - column:
+            name: first_name
+            type: VARCHAR(255)
+        - column:
+            name: last_name
+            type: VARCHAR(255)
+        tableName: twitter_user
+- changeSet:
+    id: 1621682209507-3
+    author: filippomortari (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: author
+        baseTableName: tweet
+        constraintName: author
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: username
+        referencedTableName: twitter_user
+        validate: true
+

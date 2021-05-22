@@ -1,0 +1,14 @@
+spring:
+#  h2:
+#    console:
+#      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  data:
+    jpa:
+      hibernate:
+        ddl-auto: validate
+#      repositories:
+#        bootstrap-mode: default
