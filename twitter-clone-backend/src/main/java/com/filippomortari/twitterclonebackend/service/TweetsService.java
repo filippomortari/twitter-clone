@@ -11,4 +11,6 @@ public interface TweetsService {
     Page<Tweet> getUserProfile(String username, Pageable pageable);
 
     Tweet create(String username, TweetRequest tweetRequest);
+
+    void deleteAll();
 }

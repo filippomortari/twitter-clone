@@ -49,4 +49,9 @@ public class TweetsServiceImpl implements TweetsService {
                                 HttpStatus.NOT_FOUND, String.format("Unable to retrieve user %s", username)
         ));
     }
+
+    @Override
+    public void deleteAll() {
+        tweetRepository.deleteAll();
+    }
 }

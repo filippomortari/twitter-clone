@@ -6,6 +6,7 @@ import com.filippomortari.twitterclonebackend.service.TweetsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,6 +34,12 @@ public class TweetsController {
     public Tweet post(@Valid @RequestBody TweetRequest tweetRequest) {
         String user1 = "user1";
         return tweetsService.create(user1, tweetRequest);
+    }
+
+    @DeleteMapping
+    public ResponseEntity deleteAll() {
+        tweetsService.deleteAll();
+        return ResponseEntity.ok().build();
     }
 
 }
