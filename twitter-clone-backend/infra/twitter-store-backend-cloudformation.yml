@@ -580,8 +580,10 @@ Resources:
                     - !Ref 'Secret'
                     - ':SecretString:password}}'
       NetworkMode: awsvpc
-      Memory: '512'
-      Cpu: '256'
+      Cpu: !Ref 'ContainerCpu'
+      Memory: !Ref 'ContainerMemory'
+      ExecutionRoleArn: !Ref ECSTaskExecutionRole
+
 
   ServiceTweetStore: 
     Type: AWS::ECS::Service
@@ -641,7 +643,14 @@ Resources:
 
   UserPool:
     Type: AWS::Cognito::UserPool
-    # Properties:
+    
+    Properties:
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: true
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 6
+          TemporaryPasswordValidityDays: 365
       # UsernameAttributes:
       #   - email
       # AutoVerifiedAttributes:
