@@ -28,7 +28,6 @@ Parameters:
     Description: A human-readable name for the service.
   ImageUrl:
     Type: String
-    Default: 410541938014.dkr.ecr.eu-west-2.amazonaws.com/twitter-clone-backend:0.0.1
     Description: The url of a docker image that will handle incoming traffic.
   ContainerCpu:
     Type: Number
