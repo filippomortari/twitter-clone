@@ -752,6 +752,19 @@ Resources:
                 httpMethod: "ANY"
                 uri: !GetAtt ServiceDiscoveryServiceTweetStore.Arn
                 connectionType: "VPC_LINK"
+            delete:
+              responses:
+                default:
+                  description: "Default response for DELETE /tweets - this is a utility method, please ignore, just added for my own convenience so I don't need to create a bastion to run sql scripts to truncate the tweets table"
+              # security:
+              # - my-authorizer: []
+              x-amazon-apigateway-integration:
+                payloadFormatVersion: "1.0"
+                connectionId: !Ref HttpApiVPCLink
+                type: "http_proxy"
+                httpMethod: "ANY"
+                uri: !GetAtt ServiceDiscoveryServiceTweetStore.Arn
+                connectionType: "VPC_LINK"
         x-amazon-apigateway-cors:
           # This is a Test client web app that invokes the API, used in the blog post, for demostration purposes only.
           # In production, make sure that you do NOT allow any untrusted origin.
@@ -760,8 +773,9 @@ Resources:
           allowHeaders:
             - '*'
           allowMethods:
-            - 'PUT'
+            - 'POST'
             - 'GET'
+            - 'DELETE'
         x-amazon-apigateway-importexport-version: "1.0"
 
   HttpApiStage:
