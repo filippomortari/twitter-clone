@@ -44,7 +44,9 @@ docker push ${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com/twitter-clone-back
 aws cloudformation create-stack \
 --stack-name twitter-clone-backend \
 --template-body file://infra/twitter-store-backend-cloudformation.yml \
---capabilities CAPABILITY_IAM
+--capabilities CAPABILITY_IAM \
+--parameters \
+      ParameterKey=ImageUrl,ParameterValue=${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com/twitter-clone-backend:0.0.1
 ```
 
 
