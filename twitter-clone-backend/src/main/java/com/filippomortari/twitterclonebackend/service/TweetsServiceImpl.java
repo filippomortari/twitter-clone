@@ -1,20 +1,21 @@
 package com.filippomortari.twitterclonebackend.service;
 
+import com.filippomortari.twitterclonebackend.domain.TweetRequest;
 import com.filippomortari.twitterclonebackend.domain.entity.Tweet;
-import com.filippomortari.twitterclonebackend.domain.entity.TweetRequest;
 import com.filippomortari.twitterclonebackend.domain.entity.User;
 import com.filippomortari.twitterclonebackend.repository.TweetRepository;
 import com.filippomortari.twitterclonebackend.repository.UserRepository;
+import com.filippomortari.twitterclonebackend.service.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TweetsServiceImpl implements TweetsService {
     private final TweetRepository tweetRepository;
@@ -45,9 +46,8 @@ public class TweetsServiceImpl implements TweetsService {
                     return tweetRepository.save(tweet);
                 })
                 .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND, String.format("Unable to retrieve user %s", username)
-        ));
+                        new UserNotFoundException(String.format("Unable to retrieve user %s", username))
+        );
     }
 
     @Override

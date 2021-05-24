@@ -1,4 +1,4 @@
-package com.filippomortari.twitterclonebackend.domain.entity;
+package com.filippomortari.twitterclonebackend.domain;
 
 import lombok.*;
 
