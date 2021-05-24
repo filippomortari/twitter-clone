@@ -769,7 +769,7 @@ Resources:
           # This is a Test client web app that invokes the API, used in the blog post, for demostration purposes only.
           # In production, make sure that you do NOT allow any untrusted origin.
           allowOrigins:
-            - 'https://master.d34am23lsz3nvz.amplifyapp.com'
+            - 'https://main.d18r50m4aqbc2g.amplifyapp.com'
           allowHeaders:
             - '*'
           allowMethods:
@@ -790,7 +790,7 @@ Outputs:
     Description: The URL of the sample web app client, used to test the sample API
     Value: !Join
       - ''
-      - - "https://master.d34am23lsz3nvz.amplifyapp.com/?stackregion="
+      - - "https://main.d18r50m4aqbc2g.amplifyapp.com/?stackregion="
         - !Ref 'AWS::Region'
         - "&stackhttpapi="
         - !Ref 'HttpApi'
