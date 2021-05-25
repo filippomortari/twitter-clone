@@ -684,38 +684,13 @@ Resources:
                   issuer: !GetAtt 'UserPool.ProviderURL'
                 type: jwt
         paths:
-          # /foodstore/foods/{foodId}:
-          #   get:
-          #     responses:
-          #       default:
-          #         description: "Default response for GET /foodstore/foods/{foodId}"
-          #     x-amazon-apigateway-integration:
-          #       payloadFormatVersion: "1.0"
-          #       connectionId: !Ref HttpApiVPCLink
-          #       type: "http_proxy"
-          #       httpMethod: "ANY"
-          #       uri: !GetAtt ServiceDiscoveryServiceFoodstoreFoods.Arn
-          #       connectionType: "VPC_LINK"
-          #   put:
-          #     responses:
-          #       default:
-          #         description: "Default response for PUT /foodstore/foods/{foodId}"
-          #     security:
-          #     - my-authorizer: []
-          #     x-amazon-apigateway-integration:
-          #       payloadFormatVersion: "1.0"
-          #       connectionId: !Ref HttpApiVPCLink
-          #       type: "http_proxy"
-          #       httpMethod: "ANY"
-          #       uri: !GetAtt ServiceDiscoveryServiceFoodstoreFoods.Arn
-          #       connectionType: "VPC_LINK"
           /tweets/timeline:
             get:
               responses:
                 default:
                   description: "Default response for GET /tweets/timeline"
-              # security:
-              # - my-authorizer: []
+              security:
+              - my-authorizer: []
               x-amazon-apigateway-integration:
                 payloadFormatVersion: "1.0"
                 connectionId: !Ref HttpApiVPCLink
@@ -755,8 +730,8 @@ Resources:
               responses:
                 default:
                   description: "Default response for DELETE /tweets - this is a utility method, please ignore, just added for my own convenience so I don't need to create a bastion to run sql scripts to truncate the tweets table"
-              # security:
-              # - my-authorizer: []
+              security:
+              - my-authorizer: []
               x-amazon-apigateway-integration:
                 payloadFormatVersion: "1.0"
                 connectionId: !Ref HttpApiVPCLink
