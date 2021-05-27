@@ -73,8 +73,8 @@ const AuthWrapper = () => {
           }
           {showgoToSignIn !== true &&
             <div className="container">
-              <Sidebar />
-              <Feed authState={authState} />
+              <Sidebar authState={authState}/>
+              {/* <Feed authState={authState} /> */}
             </div>
           }
         </div>
