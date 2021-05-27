@@ -8,7 +8,7 @@ import { getProfile } from './utils/fetcher'
 
 const Feed = (props) => {
   const [posts, setPosts] = useState([]);
-  
+
   useEffect(() => {
       Auth
       .currentSession()
@@ -25,16 +25,17 @@ const Feed = (props) => {
       <div className="feed__header">
         <h2>Home</h2>
       </div>
-      <TweetBox />
+      <TweetBox authState={props.authState} />
       {posts.map((post) => (
         <Post
           displayName={`${post.author.firstName} ${post.author.lastName}`}
           username={post.author.username}
           verified={true}
           text={post.content}
-          avatar={post.avatar}
+          avatar={`/static/avatar/${post.author.username}.jpeg`}
           image={post.image}
           key={post.id}
+          dateTime={post.createdDate}
         />
       ))}
     </div>

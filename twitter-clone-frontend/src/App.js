@@ -67,7 +67,7 @@ const AuthWrapper = () => {
       </div>
 
       { showApp &&
-        <div style={{ textAlign: 'center', margin: '0 0 0 0' }}>
+        <div>
           {showgoToSignIn &&
             <Button variant="outlined" onClick={goToSignIn} className="loginButton" fullWidth>SIGN IN</Button>
           }

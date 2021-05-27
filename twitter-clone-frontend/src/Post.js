@@ -6,10 +6,12 @@ import {
   Repeat,
   VerifiedUser,
 } from "@material-ui/icons";
+import Moment from 'react-moment';
+
 import React from "react";
 import "./Post.css";
 
-function Post({ displayName, username, verified, text, image, avatar }) {
+function Post({ displayName, username, verified, text, image, avatar, dateTime }) {
   return (
     <div className="post">
       <div className="post__avatar">
@@ -23,6 +25,8 @@ function Post({ displayName, username, verified, text, image, avatar }) {
               <span className="post__headerSpecial">
                 {verified && <VerifiedUser className="post__badge" />} @
                 {username}
+                <span className="post__headerSpecial date"><Moment format="MMMM Do YYYY, h:mm:ss a">{dateTime}</Moment></span>
+                
               </span>
             </h3>
           </div>

@@ -1,34 +1,35 @@
 import { Avatar, Button } from "@material-ui/core";
-import React, { useState } from "react";
-// import db from "./firebase";
+import React, { useEffect, useState } from "react";
+import { Auth } from 'aws-amplify'
 import "./TweetBox.css";
 
-function TweetBox() {
+const TweetBox = (props) => {
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
 
   const sendTweet = (e) => {
     e.preventDefault();
 
-    // db.collection("posts").add({
-    //   username: "happystark",
-    //   displayName: "Atharva Deosthale",
-    //   avatar:
-    //     "https://scontent-bom1-1.xx.fbcdn.net/v/t1.0-1/c0.33.200.200a/p200x200/51099653_766820610355014_8315780769297465344_o.jpg?_nc_cat=101&_nc_sid=7206a8&_nc_ohc=c1qBHkwAgVsAX8KynKU&_nc_ht=scontent-bom1-1.xx&oh=340b05bea693dd1671296e0c2d004bb3&oe=5F84CA62",
-    //   verified: true,
-    //   text: tweetMessage,
-    //   image: tweetImage,
-    // });
-
     setTweetMessage("");
     setTweetImage("");
   };
+
+  const [profileImage, setProfileImage] = useState("");
+
+  useEffect(() => {
+    Auth
+      .currentUserInfo()
+      .then((userInfo) => { setProfileImage(`/static/avatar/${userInfo.username}.jpeg`) })
+      .catch(err => {
+        console.log('Error : ' + err);
+      })
+  }, [props.authState]);
 
   return (
     <div className="tweetBox">
       <form>
         <div className="tweetBox__input">
-          <Avatar src="https://scontent-bom1-1.xx.fbcdn.net/v/t1.0-1/c0.33.200.200a/p200x200/51099653_766820610355014_8315780769297465344_o.jpg?_nc_cat=101&_nc_sid=7206a8&_nc_ohc=c1qBHkwAgVsAX8KynKU&_nc_ht=scontent-bom1-1.xx&oh=340b05bea693dd1671296e0c2d004bb3&oe=5F84CA62" />
+          <Avatar src={profileImage} />
           <input
             value={tweetMessage}
             onChange={(e) => setTweetMessage(e.target.value)}
