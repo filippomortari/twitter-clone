@@ -6,6 +6,8 @@
   display: flex;
   align-items: flex-start;
   border-bottom: 2px solid var(--twitter-background);
+  max-width: 700px;
+  min-width: 700px;
 }
 .post__footer {
   display: flex;

@@ -1,4 +1,4 @@
-.tweetBox {
+.tweetBox1 {
   padding-bottom: 10px;
   border-bottom: 8px solid var(--twitter-background);
   padding-right: 10px;
@@ -11,10 +11,12 @@
 
 .profileBox {
     display: flex;
-    padding-top: 20px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    background-color: var(--twitter-background);
 }
 
 .profileBoxUser {
-  margin-top: 5%;
+  margin-top: 10%;
 }
 

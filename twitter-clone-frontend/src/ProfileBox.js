@@ -24,7 +24,7 @@ const ProfileBox = (props) => {
   }, [props.authState]);
 
   return (
-    <div className="tweetBox">
+    <div className="profileBox">
         <div className="profileBox">
         <div className="post__avatar">
         <Avatar src={profileImage} style={{ height: '128px', width: '128px' }}/>
