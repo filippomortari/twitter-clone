@@ -1,18 +1,54 @@
 import { Avatar, Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { Auth } from 'aws-amplify'
+import { Auth } from 'aws-amplify';
+import { useHistory } from "react-router-dom";
+
 import "./TweetBox.css";
+
+import { postTweet } from './utils/fetcher'
 
 const TweetBox = (props) => {
   const [tweetMessage, setTweetMessage] = useState("");
-  const [tweetImage, setTweetImage] = useState("");
+  const [disabled, setDisabled] = useState("");
+  const [errMessage, setErrMessage] = useState("")
+
+  const history = useHistory();
 
   const sendTweet = (e) => {
     e.preventDefault();
 
-    setTweetMessage("");
-    setTweetImage("");
+    const payload = {content: tweetMessage};
+
+    Auth
+      .currentSession()
+      .then(tokens => tokens.accessToken.jwtToken)
+      .then((token) => postTweet(token, payload))
+      .then((result) => {
+        setTweetMessage("");
+        setDisabled("");
+        setErrMessage("");
+
+        history.push("/profile");
+      })
+      .catch(err => {
+        console.log('Error : ' + err);
+        setErrMessage(err)
+      })
+
+    
   };
+
+  const handleInput= (text) => {
+    setTweetMessage(text);
+
+    if (text.length > 160) {
+      setDisabled("disabled");
+      setErrMessage("Tweet length cannot exceed 160 characters.")
+    } else {
+      setDisabled("");
+      setErrMessage("")
+    }
+  }
 
   const [profileImage, setProfileImage] = useState("");
 
@@ -27,17 +63,18 @@ const TweetBox = (props) => {
 
   return (
     <div className="tweetBox">
+      <div className="errMessage">{errMessage}</div>
       <form>
         <div className="tweetBox__input">
           <Avatar src={profileImage} />
           <input
             value={tweetMessage}
-            onChange={(e) => setTweetMessage(e.target.value)}
+            onChange={(e) => handleInput(e.target.value)}
             placeholder="What's happening?"
             type="text"
           />
         </div>
-        <Button onClick={sendTweet} type="submit" className="tweetBox__button">
+        <Button onClick={sendTweet} disabled={disabled} type="submit" className="tweetBox__button">
           Tweet
         </Button>
       </form>

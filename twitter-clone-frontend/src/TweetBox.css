@@ -31,7 +31,22 @@
   margin-top: 20px !important;
   margin-left: auto !important;
 }
+
+.tweetBox__button:disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
+    background-color: var(--twitter-background) !important;
+}
+
 .tweetBox__imageInput {
   border: none;
   padding: 15px;
+}
+
+.errMessage {
+  color: rgb(224, 36, 94);
+  font-weight: bold;
+  font-size: 12px;
+  padding-top: 10px;
+  padding-left: 10px;
 }

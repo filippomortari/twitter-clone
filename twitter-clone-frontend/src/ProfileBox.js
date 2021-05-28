@@ -14,7 +14,6 @@ const ProfileBox = (props) => {
     Auth
       .currentUserInfo()
       .then((userInfo) => { 
-        console.log(userInfo)
         setProfileImage(`/static/avatar/${userInfo.username}.jpeg`) 
         setUsername(userInfo.username)
         

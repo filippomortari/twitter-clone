@@ -9,7 +9,6 @@ import { Button } from "@material-ui/core";
 
 import config from './config'
 
-import Feed from "./Feed";
 import Sidebar from "./Sidebar";
 import "./App.css";
 
@@ -22,7 +21,6 @@ awsconfig.Auth = {
 }
 Amplify.configure(awsconfig)
 
-var MyPropsMethods = {}
 
 const App = () => {
   return (
@@ -74,7 +72,6 @@ const AuthWrapper = () => {
           {showgoToSignIn !== true &&
             <div className="container">
               <Sidebar authState={authState}/>
-              {/* <Feed authState={authState} /> */}
             </div>
           }
         </div>
