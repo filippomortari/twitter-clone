@@ -26,7 +26,7 @@ const Feed = (props) => {
   return (
     <div className="feed">
       <div className="feed__header">
-        <h2>Home</h2>
+        <h2>{props.feedType === 'timeline' ? 'Home' : 'Profile' }</h2>
       </div>
       {props.feedType === 'timeline' && <TweetBox authState={props.authState} />}
       {props.feedType === 'profile' && <ProfileBox authState={props.authState} />}

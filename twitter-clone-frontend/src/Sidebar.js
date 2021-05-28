@@ -5,39 +5,54 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import HomeIcon from "@material-ui/icons/Home";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+  Redirect
+} from "react-router-dom";
+
 import Feed from './Feed'
 
-// const routes = [
-//   {
-//     path: "/",
-//     exact: true,
-//     sidebar: () => <div>home!</div>,
-//     main: () => <h2>Home</h2>
-//   },
-//   {
-//     path: "/bubblegum",
-//     sidebar: () => <div>bubblegum!</div>,
-//     main: () => <h2>Bubblevxczgum</h2>
-//   },
-//   {
-//     path: "/shoelaces",
-//     sidebar: () => <div>shoelaces!</div>,
-//     main: () => <h2>Shoelaces</h2>
-//   }
-// ];
+const routes = [
+  {
+    path: "/",
+    exact: true,
+    main: () => <Redirect to="/timeline" />
+  },
+  {
+    path: "/timeline",
+    main: (authState) => <Feed authState={authState} feedType="timeline" />
+  },
+  {
+    path: "/profile",
+    main: (authState) => <Feed authState={authState} feedType="profile" />
+  }
+];
 
 const Sidebar = (props) => {
   return (
-    <>
-      <div className="sidebar">
-        <TwitterIcon className="sidebar__twitterIcon" />
-        <SidebarOption Icon={HomeIcon} text="My friends tweets" active={true} />
-        <SidebarOption Icon={PermIdentityIcon} text="My tweets" />
+    <Router>
+      <>
+        <div className="sidebar">
+          <TwitterIcon className="sidebar__twitterIcon" />
+          <NavLink className="sidebarOption" activeClassName="sidebarOption--active" to="/timeline"><SidebarOption Icon={HomeIcon} text="My friends tweets" /></NavLink>
+          <NavLink className="sidebarOption" activeClassName="sidebarOption--active" to="/profile"><SidebarOption Icon={PermIdentityIcon} text="My tweets" /></NavLink>
+        </div>
 
-      </div>
-      <Feed authState={props.authState} feedType="profile" />
-    </>
-
+        <Switch>
+          {routes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              children={<route.main authState={props.authState} />}
+            />
+          ))}
+        </Switch>
+      </>
+    </Router>
   );
 }
 

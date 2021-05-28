@@ -4,6 +4,7 @@
   cursor: pointer;
   border-radius: 30px;
 }
+
 .sidebarOption:hover {
   background-color: #e8f5fe;
   color: var(--twitter-color);
@@ -17,6 +18,24 @@
   font-size: 20px;
   margin-right: 20px;
 }
-.sidebarOption--active {
+
+/* a.sidebarOption:visited {
+  color: inherit;
+} */
+
+/* .sidebarOption--active {
   color: var(--twitter-color);
+} */
+
+a.sidebarOption {
+  text-decoration: none;
+  color: #000;
+}
+
+a.sidebarOption:visited {
+  color: #000;
+}
+
+a.sidebarOption--active{
+  color: var(--twitter-color) !important;
 }
