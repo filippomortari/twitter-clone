@@ -33,7 +33,7 @@ const AuthWrapper = () => {
   const [authState, setAuthState] = React.useState()
   const [showLogin, setShowLogin] = React.useState(false)
   const goToSignIn = () => setShowLogin(true)
-  const exitFromSignIn = () => setShowLogin(false)
+  // const exitFromSignIn = () => setShowLogin(false)
   const showAuthenticator = (showLogin || authState === 'signedin')
   const showApp = (!showLogin || authState === 'signedin')
   const showgoToSignIn = !(showLogin || authState === 'signedin') && authState != null
