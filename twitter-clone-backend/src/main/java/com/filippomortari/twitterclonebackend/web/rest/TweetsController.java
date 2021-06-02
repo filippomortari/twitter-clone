@@ -3,6 +3,7 @@ package com.filippomortari.twitterclonebackend.web.rest;
 import com.filippomortari.twitterclonebackend.domain.entity.Tweet;
 import com.filippomortari.twitterclonebackend.domain.TweetRequest;
 import com.filippomortari.twitterclonebackend.service.TweetsService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +38,7 @@ public class TweetsController {
         return tweetsService.create(username, tweetRequest);
     }
 
+    @ApiOperation(value = "this is a utility method, please ignore, just added for my own convenience so I don't need to create a bastion to run sql scripts to truncate the tweets table")
     @DeleteMapping
     public ResponseEntity deleteAll() {
         tweetsService.deleteAll();
