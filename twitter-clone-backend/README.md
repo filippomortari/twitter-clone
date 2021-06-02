@@ -37,7 +37,7 @@ docker tag com.filippomortari/twitter-clone-backend:0.0.1-SNAPSHOT ${AWS_ACCOUNT
 docker push ${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com/twitter-clone-backend:0.0.1
 ```
 #### deployment via Cloudformation
-All the infra needed to support the backend is defined as code via Cloudformation templates. Below an example run: 
+All the infra needed to support the backend is defined as code via Cloudformation templates (see `infra/twitter-store-backend-cloudformation.yml`). Below an example run: 
 ```bash
 aws cloudformation create-stack \
 --stack-name twitter-clone-backend \
