@@ -13,6 +13,6 @@ import javax.validation.constraints.Size;
 public class TweetRequest {
 
     @NotEmpty
-    @Size(message = "A tweet is 160 character max", max = 160)
+    @Size(message = "A tweet is 160 characters max", max = 160)
     private String content;
 }

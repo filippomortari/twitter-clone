@@ -13,6 +13,7 @@ import java.util.UUID;
 @Getter
 @ToString
 @Builder
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)

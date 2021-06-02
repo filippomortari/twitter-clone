@@ -45,7 +45,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> handleNodataFoundException(
             UserNotFoundException ex,
-            HttpHeaders headers,
             WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
