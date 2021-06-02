@@ -20,9 +20,12 @@ import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.shaded.org.apache.commons.io.FileUtils;
 import org.testcontainers.shaded.org.apache.commons.lang.RandomStringUtils;
 
+import java.io.File;
 import java.net.URI;
+import java.nio.charset.Charset;
 
 import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -239,6 +242,24 @@ public class TweetsControllerIT {
 
         // THEN
         assertThat(exchange.getStatusCode(), is(HttpStatus.FORBIDDEN));
+    }
+
+    @Test
+    public void generateSwagger() throws Exception {
+        URI uri = URI.create(format("http://localhost:%d/v2/api-docs", serverPort));
+
+        ResponseEntity<String> exchange = restTemplate
+                .exchange(uri,
+                        HttpMethod.GET,
+                        new HttpEntity<>(
+                                null,
+                                null
+                        ),
+                        new ParameterizedTypeReference<>() {}
+                );
+        assertThat(exchange.getStatusCode(), is(HttpStatus.OK));
+
+        FileUtils.writeStringToFile(new File("swagger.json"), exchange.getBody(), Charset.defaultCharset());
     }
 
     private String generateJwtForUser(String username) {
