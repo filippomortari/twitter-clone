@@ -5,3 +5,4 @@ It is structured into two submodules, namely `twitter-clone-backend` and `twitte
 Each submodule has its own `README` that cover the peculiarities of that portion of the codebase.
 
 ## Architecture
+![](twitter-clone-architecture.png)
