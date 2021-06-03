@@ -10,6 +10,10 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity(name = "tweet")
+@Table(
+        name = "tweet",
+        indexes = {@Index(name = "fk_author_index", columnList = "author")}
+)
 @Getter
 @ToString
 @Builder

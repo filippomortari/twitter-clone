@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/20210522121645_changelog.yml
   - include:
       file: db/changelog/insert-users.yml
+  - include:
+      file: db/changelog/20210603181427_changelog.yml

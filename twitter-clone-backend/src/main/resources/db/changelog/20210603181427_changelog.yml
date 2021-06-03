@@ -1,0 +1,12 @@
+databaseChangeLog:
+- changeSet:
+    id: 1622740473636-1
+    author: filippomortari (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: author
+        indexName: fk_author_index
+        tableName: tweet
+
