@@ -4,5 +4,6 @@ It is structured into two submodules, namely `twitter-clone-backend` and `twitte
 
 Each submodule has its own `README` that cover the peculiarities of that portion of the codebase.
 
+The app is currently deployed to https://main.d18r50m4aqbc2g.amplifyapp.com
 ## Architecture
 ![](twitter-clone-architecture.png)
